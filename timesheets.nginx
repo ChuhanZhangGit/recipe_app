@@ -1,0 +1,22 @@
+upstream recipe_app {
+    server localhost:4800;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    # TODO: This should be your server name.
+    server_name timesheets.chuhandev.com;
+
+    location / {
+        proxy_pass http://recipe_app;
+    }
+
+    location /socket {
+        proxy_pass http://recipe_app;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";	 	 
+    }
+}

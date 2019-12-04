@@ -1,0 +1,16 @@
+[Unit]
+Description=Recipes_app 
+
+[Service]
+Type=simple
+User=timesheets
+Group=timesheets
+Restart=on-failure
+Environment=MIX_ENV=prod "PORT=4800"
+Environment=LANG=en_US.UTF-8
+
+WorkingDirectory=/home/recipes_app/recipes_app
+ExecStart=bash /home/recipes_app/recipes_app/start.sh
+
+[Install]
+WantedBy=multi-user.target
